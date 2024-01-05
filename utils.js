@@ -150,7 +150,9 @@ export const shapes = [
   ],
 ];
 
-export const block_collision = (block_1, block_2) => (
-    // Implement a box collision algorithm
-    
+export const detect_block_collision = (block_1, block_2) => (
+    block_1.y + block_1.height > block_2.y &&
+    block_1.x < block_2.x + block_2.width &&
+    block_1.x + block_1.height > block_2.x
 );
+

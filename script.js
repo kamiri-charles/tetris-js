@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.onkeydown = evt => {
         if (evt.key == 'ArrowUp') current_tetro.rotate();
-        if (evt.key == 'ArrowDown') current_tetro.y += 10;
-        if (evt.key == 'ArrowLeft') current_tetro.x -= 10;
-        if (evt.key == 'ArrowRight') current_tetro.x += 10;
+        //if (evt.key == 'ArrowDown') current_tetro.y++;
+        if (evt.key == 'ArrowLeft') current_tetro.move_left();
+        if (evt.key == 'ArrowRight') current_tetro.move_right();
     }
     
     
