@@ -1,6 +1,7 @@
 import Board from "./modules/board.js";
 import { Tetromino } from "./modules/tetromino.js";
-import { globals, shapes } from "./utils.js";
+import { globals } from "./utils.js";
+import { shapes } from "./shape_data.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
@@ -15,15 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let current_tetro = new Tetromino(random_shape);
 
     const surface_tetros = [];
-
-    document.onkeydown = evt => {
-        if (evt.key == 'ArrowUp') current_tetro.rotate();
-        //if (evt.key == 'ArrowDown') current_tetro.y++;
-        if (evt.key == 'ArrowLeft') current_tetro.move_left();
-        if (evt.key == 'ArrowRight') current_tetro.move_right();
-    }
-    
-    
     
     const animate = () => {
         ctx.fillStyle = 'black';
@@ -39,8 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         surface_tetros.forEach(tetro => tetro.render(ctx));
         current_tetro.render(ctx, surface_tetros);
-
-
 
         requestAnimationFrame(animate);
     }

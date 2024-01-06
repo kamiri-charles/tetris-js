@@ -9,7 +9,9 @@ export default class Block {
     }
 
     render(context) {
+        context.strokeStyle = 'black';
         context.fillStyle = 'green';
         context.fillRect(this.x, this.y, this.width, this.height)
+        context.strokeRect(this.x, this.y, this.width, this.height)
     }
 };
