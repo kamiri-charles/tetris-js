@@ -13,9 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const board = new Board();
     
     let random_shape = shapes[Math.floor(Math.random() * shapes.length)];
-    let current_tetro = new Tetromino(random_shape);
+    let current_tetro = new Tetromino(board, random_shape);
 
     const surface_tetros = [];
+
+    document.onkeydown = evt => {
+        if (evt.key == 'ArrowUp') current_tetro.rotate();
+        if (evt.key == 'ArrowDown') current_tetro.y += current_tetro.speed * 0.5;
+        if (evt.key == 'ArrowRight') current_tetro.move_right();
+        if (evt.key == 'ArrowLeft') current_tetro.move_left();
+    }
     
     const animate = () => {
         ctx.fillStyle = 'black';
@@ -25,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (current_tetro.reached_bottom) {
             surface_tetros.push(current_tetro);
             current_tetro = new Tetromino(
-              shapes[Math.floor(Math.random() * shapes.length)]
+                board, 
+                shapes[Math.floor(Math.random() * shapes.length)]
             );
         }
 

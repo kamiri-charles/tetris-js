@@ -1,15 +1,15 @@
 import { globals, detect_block_collision } from "../utils.js";
 import Block from "./block.js";
-import Controller from "./controller.js";
 
 export class Tetromino {
-	constructor(shape) {
+	constructor(board, shape) {
+		this.board = board;
 		this.shape = shape;
 		this.x = (globals.CANVAS_WIDTH * 0.5) - (globals.BOARD_WIDTH * 0.5)
 		this.y = 0;
 		this.color = 'black';
 		this.current_rotation = 0;
-		this.max_rotations = this.shape.length - 1;
+		this.max_rotations = shape.length - 1;
 		this.mov = 0;
 		this.speed = 20;
 		this.min_left_dist = 0;
@@ -17,20 +17,16 @@ export class Tetromino {
 		this.blocks = [];
 		
 		this.reached_bottom = false;
-
-		this.controller = new Controller();
-	}
-
-	update_controls() {
-		if (this.controller.up) console.log('up');
-		if (this.controller.left) this.move_left();
-		if (this.controller.right) this.move_right();
-		if (this.controller.down) this.y += this.speed;
 	}
 	
 	move_right() {
-
+		this.x += this.speed;
 	}
+
+	move_left() {
+		this.x -= this.speed;
+	}
+
 	rotate() {
 		this.current_rotation++;
 	}
@@ -78,10 +74,6 @@ export class Tetromino {
 				}
 			}
 		};
-
-		if (!this.reached_bottom) {
-			this.update_controls();
-		}
 		
 		this.fall();
 	}
