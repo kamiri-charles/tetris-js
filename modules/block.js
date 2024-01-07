@@ -1,17 +1,16 @@
 import { globals } from "../utils.js";
 
 export default class Block {
-    constructor(x, y) {
+    constructor({x, y, color = 'black'}) {
         this.x = x;
         this.y = y;
+        this.color = color;
         this.width = globals.BLOCK_SIZE;
         this.height = globals.BLOCK_SIZE;
     }
 
     render(context) {
-        context.strokeStyle = 'black';
-        context.fillStyle = 'green';
+        context.fillStyle = this.color;
         context.fillRect(this.x, this.y, this.width, this.height)
-        context.strokeRect(this.x, this.y, this.width, this.height)
     }
 };

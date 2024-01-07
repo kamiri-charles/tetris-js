@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.onkeydown = evt => {
         if (evt.key == 'ArrowUp') current_tetro.rotate();
         if (evt.key == 'ArrowDown') current_tetro.y += current_tetro.speed * 0.5;
-        if (evt.key == 'ArrowRight') current_tetro.move_right();
-        if (evt.key == 'ArrowLeft') current_tetro.move_left();
+        if (evt.key == 'ArrowRight') current_tetro.move_right(surface_tetros);
+        if (evt.key == 'ArrowLeft') current_tetro.move_left(surface_tetros);
     }
     
     const animate = () => {

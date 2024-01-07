@@ -10,7 +10,7 @@ export default class Board {
 
     render(context) {
         context.beginPath();
-        context.fillStyle = 'white';
+        context.fillStyle = 'skyblue';
         context.fillRect(this.x, this.y, this.width, this.height);
     }
 }

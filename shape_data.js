@@ -7,6 +7,7 @@ export const shapes = [
       [0, 1, 1, 0],
       [0, 0, 0, 0],
     ],
+    { color: "yellow" },
   ],
 
   // line block
@@ -23,6 +24,7 @@ export const shapes = [
       [0, 1, 0, 0],
       [0, 1, 0, 0],
     ],
+    { color: "red" },
   ],
 
   // t block
@@ -51,6 +53,7 @@ export const shapes = [
       [1, 1, 0, 0],
       [0, 1, 0, 0],
     ],
+    { color: "red" },
   ],
 
   // l block
@@ -79,6 +82,7 @@ export const shapes = [
       [1, 1, 1, 0],
       [0, 0, 0, 0],
     ],
+    { color: "red" },
   ],
 
   // j block
@@ -107,6 +111,7 @@ export const shapes = [
       [0, 0, 1, 0],
       [0, 0, 0, 0],
     ],
+    { color: "red" },
   ],
 
   // y block
@@ -123,6 +128,7 @@ export const shapes = [
       [0, 0, 1, 0],
       [0, 0, 0, 0],
     ],
+    { color: "red" },
   ],
 
   // y block
@@ -139,5 +145,6 @@ export const shapes = [
       [0, 1, 0, 0],
       [0, 0, 0, 0],
     ],
+    { color: "red" },
   ],
 ];
