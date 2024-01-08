@@ -37,36 +37,58 @@ export class Tetromino {
 	
 	move_right(surface_tetros = []) {
 		let move = true;
-		if (surface_tetros.length != 0) {
-			surface_tetros.forEach(tetro => {
-				for (let i = 0; i < this.blocks.length; i++) {
-					for (let j = 0; j < tetro.blocks.length; j++) {
-						let fut_x = this.blocks[i].x + this.blocks[i].width + this.speed;
-						if (in_y_range(this.blocks[i], tetro.blocks[j]) && fut_x >= tetro.blocks[j].x) {
+
+		// Check board boundaries
+		for (const block of this.blocks) {
+			if (block.x + + block.width + this.speed > this.board.x + this.board.width) {
+				move = false;
+				return;
+			}
+		}
+
+		// Check for collision with surface tetros
+		surface_tetros.forEach(tetro => {
+			for (let i = 0; i < this.blocks.length; i++) {
+				for (let j = 0; j < tetro.blocks.length; j++) {
+					let fut_x = this.blocks[i].x + this.blocks[i].width + this.speed;
+					if (in_y_range(this.blocks[i], tetro.blocks[j]) &&
+						this.blocks[i].x + this.blocks[i].width <= tetro.blocks[j].x &&
+						fut_x >= tetro.blocks[j].x) {
 							move = false;
-						}
+							return;
 					}
 				}
-			});
-		};
+			}
+		});
 
 		if (move) this.x += this.speed;
 	}
 
 	move_left(surface_tetros = []) {
 		let move = true;
-		if (surface_tetros.length != 0) {
-			surface_tetros.forEach(tetro => {
-				for (let i = 0; i < this.blocks.length; i++) {
-					for (let j = 0; j < tetro.blocks.length; j++) {
-						let fut_x = this.blocks[i].x - this.speed;
-						if (in_y_range(this.blocks[i], tetro.blocks[j]) && fut_x <= tetro.blocks[j].x + tetro.blocks[j].width) {
+
+		// Check board boundaries
+		for (const block of this.blocks) {
+			if (block.x - this.speed < this.board.x) {
+				move = false;
+				return;
+			}
+		}
+
+		// Check for collision with surface tetros
+		surface_tetros.forEach(tetro => {
+			for (let i = 0; i < this.blocks.length; i++) {
+				for (let j = 0; j < tetro.blocks.length; j++) {
+					let fut_x = this.blocks[i].x - this.speed;
+					if (in_y_range(this.blocks[i], tetro.blocks[j]) &&
+						this.blocks[i].x >= tetro.blocks[j].x + tetro.blocks[j].width &&
+						fut_x <= tetro.blocks[j].x + tetro.blocks[j].width) {
 							move = false;
+							return;
 						}
-					}
 				}
-			});
-		};
+			}
+		});
 
 		if (move) this.x -= this.speed;
 	}
@@ -90,8 +112,8 @@ export class Tetromino {
 				
 		// Check if any tetro-blocks has reached the bottom
 		for (let i = 0; i < this.blocks.length; i++) {
-			if (this.blocks[i].y + this.blocks[i].height >= globals.BOARD_HEIGHT + 50) {
-					this.reached_bottom = true;
+			if (this.blocks[i].y + this.blocks[i].height >= this.board.height + 50) {
+				this.reached_bottom = true;
 			}
 		};
 					
