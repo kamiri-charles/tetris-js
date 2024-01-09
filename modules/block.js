@@ -7,6 +7,7 @@ export default class Block {
         this.color = color;
         this.width = globals.BLOCK_SIZE;
         this.height = globals.BLOCK_SIZE;
+        this.marked_for_deletion = false;
     }
 
     render(context) {

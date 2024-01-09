@@ -2,6 +2,7 @@ import Board from "./modules/board.js";
 import { Tetromino } from "./modules/tetromino.js";
 import { globals } from "./utils.js";
 import { shapes } from "./shape_data.js";
+import Effect from "./modules/effect.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
@@ -13,15 +14,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const board = new Board();
     
     let random_shape = shapes[Math.floor(Math.random() * shapes.length)];
-    let current_tetro = new Tetromino(board, random_shape);
+    //let current_tetro = new Tetromino(board, random_shape);
+    let current_tetro = new Tetromino(board, shapes[1]);
 
-    const surface_tetros = [];
+    let fallen_blocks = [];
+    let effects = [];
 
+    // Score logic
+    let score = 0;
+    const row_max_blocks = globals.BOARD_WIDTH / globals.BLOCK_SIZE;
+
+    const check_rows = () => {
+        for (let i = board.y + board.height + 1; i >= 0; i -= globals.BLOCK_SIZE) {
+            let row_blocks = fallen_blocks.filter(block => (block.y + block.height) == i);
+            
+            if (row_blocks.length >= row_max_blocks) {
+                row_blocks.forEach(block => {
+                    effects.push(new Effect(
+                        block.x,
+                        block.y
+                    ));
+                    block.marked_for_deletion = true;
+                });
+
+                console.log(row_blocks);
+
+                fallen_blocks.forEach(block => block.y += globals.BLOCK_SIZE);
+            }
+        }
+    }
+
+    // Controls
     document.onkeydown = evt => {
         if (evt.key == 'ArrowUp') current_tetro.rotate();
         if (evt.key == 'ArrowDown') current_tetro.y += current_tetro.speed * 0.5;
-        if (evt.key == 'ArrowRight') current_tetro.move_right(surface_tetros);
-        if (evt.key == 'ArrowLeft') current_tetro.move_left(surface_tetros);
+        if (evt.key == 'ArrowRight') current_tetro.move_right(fallen_blocks);
+        if (evt.key == 'ArrowLeft') current_tetro.move_left(fallen_blocks);
     }
     
     const animate = () => {
@@ -29,16 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         board.render(ctx);
         
+        
         if (current_tetro.reached_bottom) {
-            surface_tetros.push(current_tetro);
+            current_tetro.blocks.forEach(block => fallen_blocks.push(block));
+            check_rows();
             current_tetro = new Tetromino(
-                board, 
-                shapes[Math.floor(Math.random() * shapes.length)]
-            );
+							board,
+							shapes[Math.floor(Math.random() * shapes.length)]
+						);
         }
 
-        surface_tetros.forEach(tetro => tetro.render(ctx));
-        current_tetro.render(ctx, surface_tetros);
+        fallen_blocks.forEach(block => block.render(ctx));
+        fallen_blocks = fallen_blocks.filter(block => !block.marked_for_deletion);
+        effects.forEach(effect => effect.render(ctx));
+        effects = effects.filter(effect => !effect.marked_for_deletion);
+        current_tetro.render(ctx, fallen_blocks);
 
         requestAnimationFrame(animate);
     }

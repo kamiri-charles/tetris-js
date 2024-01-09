@@ -4,6 +4,7 @@ export const globals = {
 	BOARD_WIDTH: 400,
 	BOARD_HEIGHT: window.innerHeight - 100,
 	BLOCK_SIZE: 20,
+	FALL_SPEED: 5
 };
 
 
