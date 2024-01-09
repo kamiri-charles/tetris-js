@@ -52,7 +52,7 @@ export class Tetromino {
 				for (let j = 0; j < tetro.blocks.length; j++) {
 					let fut_x = this.blocks[i].x + this.blocks[i].width + this.speed;
 					if (in_y_range(this.blocks[i], tetro.blocks[j]) &&
-						this.blocks[i].x + this.blocks[i].width <= tetro.blocks[j].x &&
+						this.blocks[i].x + this.blocks[i].width < tetro.blocks[j].x &&
 						fut_x >= tetro.blocks[j].x) {
 							move = false;
 							return;
@@ -81,7 +81,7 @@ export class Tetromino {
 				for (let j = 0; j < tetro.blocks.length; j++) {
 					let fut_x = this.blocks[i].x - this.speed;
 					if (in_y_range(this.blocks[i], tetro.blocks[j]) &&
-						this.blocks[i].x >= tetro.blocks[j].x + tetro.blocks[j].width &&
+						this.blocks[i].x > tetro.blocks[j].x + tetro.blocks[j].width &&
 						fut_x <= tetro.blocks[j].x + tetro.blocks[j].width) {
 							move = false;
 							return;
@@ -110,11 +110,19 @@ export class Tetromino {
 			this.current_rotation = 0;
 		};
 				
-		// Check if any tetro-blocks has reached the bottom
+		// Vertical and horizontal boundaries;
 		for (let i = 0; i < this.blocks.length; i++) {
 			if (this.blocks[i].y + this.blocks[i].height >= this.board.height + 50) {
 				this.reached_bottom = true;
-			}
+			};
+
+			if (this.blocks[i].x < this.board.x) {
+				this.x += this.speed;
+			};
+
+			if (this.blocks[i].x + this.blocks[i].width > this.board.x + this.board.width) {
+				this.x -= this.speed;
+			};
 		};
 					
 		// Check if the current tetro is colliding with surface tetros
