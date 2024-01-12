@@ -6,6 +6,9 @@ export default class Board {
         this.height = globals.BOARD_HEIGHT;
         this.x = (globals.CANVAS_WIDTH * 0.5) - (this.width * 0.5);
         this.y = 50;
+        this.left = this.x;
+        this.right = this.x + this.width;
+        this.bottom = this.y + this.height - 0.5;
     }
 
     render(context) {

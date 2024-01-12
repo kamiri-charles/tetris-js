@@ -7,7 +7,7 @@ export const shapes = [
 			[0, 1, 1, 0],
 			[0, 0, 0, 0],
 		],
-		{ color: "yellow" },
+		{ color: "navy" },
 	],
 	
 	// line block
@@ -53,7 +53,7 @@ export const shapes = [
 			[1, 1, 0, 0],
 			[0, 1, 0, 0],
 		],
-		{ color: "violet" },
+		{ color: "purple" },
 	],
 	
 	// l block

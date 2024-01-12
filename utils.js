@@ -4,18 +4,26 @@ export const globals = {
 	BOARD_WIDTH: 400,
 	BOARD_HEIGHT: window.innerHeight - 100,
 	BLOCK_SIZE: 20,
-	FALL_SPEED: 5
+	FALL_SPEED: 1
 };
 
 
-export const detect_block_collision = (block_1, block_2) => (
-	block_1.y + block_1.height > block_2.y &&
-	block_1.x < block_2.x + block_2.width &&
-	block_1.x + block_1.width > block_2.x
+// Utility functions
+export const in_range = (flag, start, stop) => (
+	flag > start && flag < stop
 );
 
+export const in_x_range = (block_1, block_2) => (
+	in_range(block_1.left, block_2.left, block_2.right) ||
+	in_range(block_1.left, block_2.left, block_2.right)
+);
 
 export const in_y_range = (block_1, block_2) => (
-	(block_1.y > block_2.y && block_1.y < block_2.y + block_2.height) ||
-	(block_1.y + block_1.height > block_2.y && block_1.y + block_1.height < block_2.y + block_2.height)
+	in_range(block_1.top, block_2.top, block_2.bottom) ||
+	in_range(block_1.bottom, block_2.top, block_2.bottom)
 );
+
+export const detect_block_collision = (block_1, block_2) => (
+	in_x_range(block_1, block_2) && in_y_range(block_1, block_2)
+);
+

@@ -7,6 +7,10 @@ export default class Block {
         this.color = color;
         this.width = globals.BLOCK_SIZE;
         this.height = globals.BLOCK_SIZE;
+        this.top = this.y;
+        this.left = this.x;
+        this.right = this.x + this.width;
+        this.bottom = this.y + this.height;
         this.marked_for_deletion = false;
     }
 

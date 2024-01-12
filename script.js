@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const board = new Board();
     
     let random_shape = shapes[Math.floor(Math.random() * shapes.length)];
-    //let current_tetro = new Tetromino(board, random_shape);
-    let current_tetro = new Tetromino(board, shapes[1]);
+    let current_tetro = new Tetromino(board, random_shape);
 
     let fallen_blocks = [];
     let effects = [];
@@ -37,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     block.marked_for_deletion = true;
                 });
 
-                console.log(row_blocks);
 
                 fallen_blocks.forEach(block => block.y += globals.BLOCK_SIZE);
             }
