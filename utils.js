@@ -9,21 +9,38 @@ export const globals = {
 
 
 // Utility functions
-export const in_range = (flag, start, stop) => (
-	flag > start && flag < stop
-);
-
-export const in_x_range = (block_1, block_2) => (
-	in_range(block_1.left, block_2.left, block_2.right) ||
-	in_range(block_1.left, block_2.left, block_2.right)
-);
-
-export const in_y_range = (block_1, block_2) => (
-	in_range(block_1.top, block_2.top, block_2.bottom) ||
-	in_range(block_1.bottom, block_2.top, block_2.bottom)
-);
-
 export const detect_block_collision = (block_1, block_2) => (
-	in_x_range(block_1, block_2) && in_y_range(block_1, block_2)
+	block_1.bottom >= block_2.top &&
+	(block_1.right > block_2.left && block_1.right <= block_2.right)
 );
+
+export const x_dist = (block_1, block_2) => {
+	let dist = 0;
+
+	// calculate x distance
+	if (block_1.right < block_2.left) {
+		dist = block_2.left - block_1.right;
+	};
+
+	if (block_1.left > block_2.right) {
+		dist = block_1.left - block_2.right;
+	};
+
+	return dist;
+};
+
+export const y_dist = (block_1, block_2) => {
+	let dist = 0;
+
+	// calculate x distance
+	if (block_1.bottom < block_2.top) {
+		dist = block_2.top - block_1.bottom;
+	}
+
+	if (block_1.top > block_2.bottom) {
+		dist = block_1.top - block_2.bottom;
+	}
+
+	return dist;
+};
 

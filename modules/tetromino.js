@@ -1,4 +1,4 @@
-import { globals, detect_block_collision, in_y_range } from "../utils.js";
+import { globals, detect_block_collision, x_dist, y_dist} from "../utils.js";
 import Block from "./block.js";
 
 export class Tetromino {
@@ -50,14 +50,13 @@ export class Tetromino {
 		// Check for collision with surface tetros
 		for (let i = 0; i < this.blocks.length; i++) {
 			for (let j = 0; j < fallen_blocks.length; j++) {
-				let fut_x = this.blocks[i].right + this.speed;
+				let x_offset = x_dist(this.blocks[i], fallen_blocks[j]);
+				let y_offset = y_dist(this.blocks[i], fallen_blocks[j]);
 				if (
-					in_y_range(this.blocks[i], fallen_blocks[j]) &&
-					this.blocks[i].right < fallen_blocks[j].left &&
-					fut_x > fallen_blocks[j].left
-					) {
-						move = false;
-						return;
+					y_offset == 0 && x_offset < this.speed
+				) {
+					move = false;
+					return;
 				}
 			}
 		}
@@ -79,13 +78,12 @@ export class Tetromino {
 		// Check for collision with surface tetros
 		for (let i = 0; i < this.blocks.length; i++) {
 			for (let j = 0; j < fallen_blocks.length; j++) {
-				let fut_x = this.blocks[i].left - this.speed;
-				if (in_y_range(this.blocks[i], fallen_blocks[j]) &&
-					this.blocks[i].left > fallen_blocks[j].right &&
-					fut_x < fallen_blocks[j].right) {
-						move = false;
-						return;
-					}
+				let x_offset = x_dist(this.blocks[i], fallen_blocks[j]);
+				let y_offset = y_dist(this.blocks[i], fallen_blocks[j]);
+				if (y_offset == 0 && x_offset > this.speed) {
+					move = false;
+					return;
+				}
 			}
 		}
 
