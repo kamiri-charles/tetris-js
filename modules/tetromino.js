@@ -107,8 +107,18 @@ export class Tetromino {
 				
 		// Vertical and horizontal boundaries;
 		for (let i = 0; i < this.blocks.length; i++) {
-			if (this.blocks[i].y + this.blocks[i].height >= this.board.bottom) {
+			if (this.blocks[i].bottom >= this.board.bottom) {
 				this.reached_bottom = true;
+
+				// Offset to the top if they cross the bottom border
+				if (this.blocks[i].bottom > this.board.bottom) {
+					let offset = this.blocks[i].bottom - this.board.bottom;
+
+					this.blocks.forEach(block => {
+						block.y -= offset;
+						block.update();
+					});
+				}
 			};
 
 			if (this.blocks[i].x < this.board.x) {

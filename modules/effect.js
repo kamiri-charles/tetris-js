@@ -13,7 +13,7 @@ export default class Effect {
 
 	render(context) {
 		this.counter += 1;
-		if (this.counter % 5 == 0) {
+		if (this.counter % 4 == 0) {
 			this.frame += this.size;
 		}
 
@@ -32,9 +32,5 @@ export default class Effect {
 			this.size,
 			this.size
 		);
-		/* context.beginPath();
-            context.strokeStyle = 'black';
-            context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            context.stroke(); */
 	}
 }

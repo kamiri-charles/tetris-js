@@ -1,10 +1,10 @@
 export const globals = {
 	CANVAS_WIDTH: window.innerWidth,
 	CANVAS_HEIGHT: window.innerHeight,
-	BOARD_WIDTH: 400,
+	BOARD_WIDTH: 300,
 	BOARD_HEIGHT: window.innerHeight - 100,
 	BLOCK_SIZE: 20,
-	FALL_SPEED: 1
+	FALL_SPEED: 5
 };
 
 

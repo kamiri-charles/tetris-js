@@ -8,7 +8,8 @@ export default class Board {
         this.y = 50;
         this.left = this.x;
         this.right = this.x + this.width;
-        this.bottom = this.y + this.height - 0.5;
+        this.top = this.y;
+        this.bottom = this.y + this.height;
     }
 
     render(context) {

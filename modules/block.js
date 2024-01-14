@@ -8,10 +8,17 @@ export default class Block {
         this.width = globals.BLOCK_SIZE;
         this.height = globals.BLOCK_SIZE;
         this.top = this.y;
+        this.bottom = this.y + this.height;
         this.left = this.x;
         this.right = this.x + this.width;
-        this.bottom = this.y + this.height;
         this.marked_for_deletion = false;
+    }
+
+    update() {
+        this.top = this.y;
+		this.bottom = this.y + this.height;
+		this.left = this.x;
+		this.right = this.x + this.width;
     }
 
     render(context) {
