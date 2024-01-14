@@ -52,9 +52,7 @@ export class Tetromino {
 			for (let j = 0; j < fallen_blocks.length; j++) {
 				let x_offset = x_dist(this.blocks[i], fallen_blocks[j]);
 				let y_offset = y_dist(this.blocks[i], fallen_blocks[j]);
-				if (
-					y_offset == 0 && x_offset < this.speed
-				) {
+				if (y_offset == 0 && x_offset == 0 && this.blocks[i].right <= fallen_blocks[j].left) {
 					move = false;
 					return;
 				}
@@ -80,7 +78,7 @@ export class Tetromino {
 			for (let j = 0; j < fallen_blocks.length; j++) {
 				let x_offset = x_dist(this.blocks[i], fallen_blocks[j]);
 				let y_offset = y_dist(this.blocks[i], fallen_blocks[j]);
-				if (y_offset == 0 && x_offset > this.speed) {
+				if (y_offset == 0 && x_offset == 0 && this.blocks[i].left >= fallen_blocks[j].right) {
 					move = false;
 					return;
 				}
