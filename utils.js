@@ -4,13 +4,13 @@ export const globals = {
 	BOARD_WIDTH: 300,
 	BOARD_HEIGHT: window.innerHeight - 100,
 	BLOCK_SIZE: 20,
-	FALL_SPEED: 5
+	FALL_SPEED: 3
 };
 
 
 // Utility functions
 export const detect_block_collision = (block_1, block_2) => (
-	block_1.bottom >= block_2.top &&
+	(block_1.bottom >= block_2.top && block_1.top <= block_2.bottom) &&
 	(block_1.right > block_2.left && block_1.right <= block_2.right)
 );
 
