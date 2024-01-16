@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (evt.key == 'ArrowDown') current_tetro.y += current_tetro.speed * 0.5;
         if (evt.key == 'ArrowRight') current_tetro.move_right(fallen_blocks);
         if (evt.key == 'ArrowLeft') current_tetro.move_left(fallen_blocks);
-        if (evt.key == 'q') console.log(fallen_blocks, board.bottom);
+        if (evt.key == 'q') console.log(current_tetro.shadow);
     }
     
     const animate = () => {

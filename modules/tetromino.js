@@ -18,6 +18,7 @@ export class Tetromino {
 		this.fall_speed = globals.FALL_SPEED;
 		
 		this.reached_bottom = false;
+
 	}
 
 	generate_blocks() {
@@ -95,6 +96,7 @@ export class Tetromino {
 	fall() {
 		if (!this.reached_bottom) this.y += this.fall_speed;
 	}
+
 	
 	update(fallen_blocks) {
 		this.blocks = [];
@@ -142,10 +144,11 @@ export class Tetromino {
 		};
 		
 		this.fall();
+		
 	}
 					
 	render(context, surface_tetros) {
 		this.update(surface_tetros);
 		this.blocks.forEach(block => block.render(context));
 	}
-}
+};
